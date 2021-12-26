@@ -62,7 +62,13 @@ class PlaneGame:
             self.hero.speed = 0
 
     def __check_collide(self):
-        pass
+        pygame.sprite.groupcollide(self.hero.bullets, self.enemy_group, True, True)
+
+        enemies = pygame.sprite.spritecollide(self.hero, self.enemy_group, True)
+
+        if len(enemies):
+            self.hero.kill()
+            self.__game_over()
 
     def __update_sprites(self):
         self.back_group.update()
