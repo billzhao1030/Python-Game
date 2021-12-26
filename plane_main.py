@@ -12,17 +12,20 @@ class PlaneGame:
         # create sprite
         self.__create_sprite()
 
+        pygame.time.set_timer(CREATE_ENEMY_EVENT, 1000)
+
     def __create_sprite(self):
-        bg1 = Background("./images/background.png")
-        bg2 = Background("./images/background.png")
-        bg2.rect.y = -bg2.rect.height
+        bg1 = Background()
+        bg2 = Background(True)
 
         self.back_group = pygame.sprite.Group(bg1, bg2)
+
+        self.enemy_group = pygame.sprite.Group()
 
     def start_game(self):
         while True:
             # set rate
-            self.clock.tick(FPS)
+            self.clock.tick(FRAME_PER_SECOND)
 
             # event handler
             self.__event_handler()
@@ -41,13 +44,19 @@ class PlaneGame:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 PlaneGame.__game_over()
+            elif event.type == CREATE_ENEMY_EVENT:
+                enemy = Enemy()
+                self.enemy_group.add(enemy)
 
     def __check_collide(self):
         pass
 
     def __update_sprites(self):
-        self.back_group.update();
+        self.back_group.update()
         self.back_group.draw(self.screen)
+
+        self.enemy_group.update()
+        self.enemy_group.draw(self.screen)
         pass
 
     @staticmethod
