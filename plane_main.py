@@ -1,9 +1,6 @@
 import pygame
 from plane_sprites import *
 
-SCREEN_RECT = pygame.Rect(0, 0, 480, 700)
-FPS = 60
-
 
 class PlaneGame:
 
@@ -16,7 +13,11 @@ class PlaneGame:
         self.__create_sprite()
 
     def __create_sprite(self):
-        pass
+        bg1 = Background("./images/background.png")
+        bg2 = Background("./images/background.png")
+        bg2.rect.y = -bg2.rect.height
+
+        self.back_group = pygame.sprite.Group(bg1, bg2)
 
     def start_game(self):
         while True:
@@ -34,7 +35,7 @@ class PlaneGame:
 
             # update screen
             pygame.display.update()
-            pass
+
 
     def __event_handler(self):
         for event in pygame.event.get():
@@ -45,6 +46,8 @@ class PlaneGame:
         pass
 
     def __update_sprites(self):
+        self.back_group.update();
+        self.back_group.draw(self.screen)
         pass
 
     @staticmethod

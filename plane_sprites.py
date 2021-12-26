@@ -1,5 +1,8 @@
 import pygame
 
+SCREEN_RECT = pygame.Rect(0, 0, 480, 700)
+FPS = 60
+
 
 class GameSprite(pygame.sprite.Sprite):
 
@@ -12,3 +15,12 @@ class GameSprite(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.y += self.speed
+
+
+class Background(GameSprite):
+
+    def update(self):
+        super().update()
+
+        if self.rect.y >= SCREEN_RECT.height:
+            self.rect.y = -self.rect.height
