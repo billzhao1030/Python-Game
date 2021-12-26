@@ -22,6 +22,9 @@ class PlaneGame:
 
         self.enemy_group = pygame.sprite.Group()
 
+        self.hero = Hero()
+        self.hero_group = pygame.sprite.Group(self.hero)
+
     def start_game(self):
         while True:
             # set rate
@@ -38,7 +41,6 @@ class PlaneGame:
 
             # update screen
             pygame.display.update()
-
 
     def __event_handler(self):
         for event in pygame.event.get():
@@ -57,7 +59,9 @@ class PlaneGame:
 
         self.enemy_group.update()
         self.enemy_group.draw(self.screen)
-        pass
+
+        self.hero_group.update()
+        self.hero_group.draw(self.screen)
 
     @staticmethod
     def __game_over():

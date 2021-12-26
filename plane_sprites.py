@@ -51,3 +51,13 @@ class Enemy(GameSprite):
         if self.rect.y >= SCREEN_RECT.height:
             self.kill()
 
+
+class Hero(GameSprite):
+    def __init__(self):
+        super().__init__("./images/me1.png", 0)
+        self.rect.centerx = SCREEN_RECT.centerx
+        self.rect.bottom = SCREEN_RECT.height - 120
+
+
+class Bullet(GameSprite):
+    pass
